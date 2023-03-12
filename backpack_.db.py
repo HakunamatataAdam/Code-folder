@@ -61,3 +61,4 @@ with sqlite3.connect(DATABASE_FILE) as connection:
    update_description(connection,"bullet","unidetifyed bullet type")
    show_backpack(connection)
 
+  
