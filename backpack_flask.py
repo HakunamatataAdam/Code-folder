@@ -1,4 +1,4 @@
-from flask import Flask,g
+from flask import Flask,g, render_template
 import sqlite3 
 
 app = Flask(__name__)
@@ -17,6 +17,9 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
+@app.route("/")
+def home():
+    return render_template("home.html")
 
 @app.route("/contents")
 def index():
