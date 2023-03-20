@@ -27,7 +27,7 @@ def index():
     sql = "SELECT * FROM contents"
     cursor.execute(sql)
     results = cursor.fetchall()
-    return str(results)
+    return render_template("contents.html", results=results)
 
 if __name__ == "__main__":
     app.run(debug=True)

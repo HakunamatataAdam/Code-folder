@@ -7,6 +7,8 @@
     <title>contents</title>
 </head>
 <body>
-    {{results}}
+    {% for item in results %}
+    <hi>{{item[1]}} {{item[2]}}</hi>
+    {% endfor %}
 </body>
 </html>
