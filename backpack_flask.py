@@ -1,4 +1,4 @@
-from flask import Flask,g, render_template
+from flask import Flask,g, render_template,request, redirect
 import sqlite3 
 
 app = Flask(__name__)
@@ -25,12 +25,17 @@ def home():
     results = cursor.fetchall()
     return render_template("contents.html", results=results)
     
-@app.route('/add')
+@app.route('/add', methods=["GET","POST"])
 def add():
-    cursor = get_db().cursor()
-    sql = "INSERT INTO FROM contents(name, discription) VALUES (?,?)"
-    cursor.execute(sql,)
-    return render_template("contents.html", results=results)
+    if request.method == "POST":
+        cursor = get_db().cursor()
+        new_name = request.form["item_name"]
+        new_description = request.form["item_description"]
+        sql = "INSERT INTO FROM contents(name, discription) VALUES (?,?)"
+        cursor.execute(sql,(new_name,new_description))
+        get_db().commit()
+    return redirect('/')
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
