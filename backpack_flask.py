@@ -19,14 +19,17 @@ def close_connection(exception):
 
 @app.route("/")
 def home():
-    return render_template("home.html")
-
-@app.route("/contents")
-def index():
     cursor = get_db().cursor()
     sql = "SELECT * FROM contents"
     cursor.execute(sql)
     results = cursor.fetchall()
+    return render_template("contents.html", results=results)
+    
+@app.route('/add')
+def add():
+    cursor = get_db().cursor()
+    sql = "INSERT INTO FROM contents(name, discription) VALUES (?,?)"
+    cursor.execute(sql,)
     return render_template("contents.html", results=results)
 
 if __name__ == "__main__":
