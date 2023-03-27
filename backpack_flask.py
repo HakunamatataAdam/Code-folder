@@ -31,10 +31,21 @@ def add():
         cursor = get_db().cursor()
         new_name = request.form["item_name"]
         new_description = request.form["item_description"]
-        sql = "INSERT INTO FROM contents(name, discription) VALUES (?,?)"
-        cursor.execute(sql,(new_name,new_description))
+        sql = "INSERT INTO contents(name, discription) VALUES (?,?)"
+        cursor.execute(sql,(new_name, new_description))
         get_db().commit()
     return redirect('/')
+
+@app.route('/delete', methods=["GET","POST"])
+def delete():
+    if request.method == "POST":
+        #get the item and delete from database
+        cursor = get_db().cursor()
+        id = int(request.form["item_name"])
+        sql = "DELETE FROM contents WHERE id=?"
+        cursor.execute(sql,(id,))
+        get_db().commit()
+    return redirect("/")
     
 
 if __name__ == "__main__":
